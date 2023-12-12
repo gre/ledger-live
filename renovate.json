@@ -1,34 +1,18 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": ["config:recommended", ":dependencyDashboard"],
+  "extends": [
+    "config:base"
+  ],
+  "onboarding": false,
+  "separateMajorMinor": false,
   "dependencyDashboard": true,
   "labels": ["dependencies"],
   "automerge": false,
   "detectGlobalManagerConfig": true,
   "ignoreScripts": false,
-  "vulnerabilityAlerts": {
-    "enabled": true,
-    "labels": ["security"],
-    "prPriority": 999
-  },
   "packageRules": [
     {
-      "description": "Core Ownership Rules",
-      "matchPackagePatterns": [
-        "changesets",
-        "commitlint",
-        "esbuild",
-        "eslint",
-        "prettier",
-        "turbo",
-        "typescript",
-        "vite",
-        "zx"
-      ],
-      "reviewers": ["team:@ledgerhq/live-eng-core"]
-    },
-    {
-      "description": "Electron linked updates",
+      "description": "LLD Electron packages",
       "matchPackagePatterns": ["electron", "^@electron"],
       "excludePackageNames": [
         "@sentry/electron",
@@ -37,28 +21,10 @@
         "vite-plugin-electron"
       ],
       "groupName": "electron",
-      "reviewers": ["team:@ledgerhq/live-eng-core", "team:@ledgerhq/live-hub"]
-    },
-    {
-      "description": "Metro linked updates",
-      "matchPackageNames": [
-        "metro",
-        "metro-core",
-        "metro-config",
-        "metro-resolver",
-        "metro-runtime",
-        "metro-source-map",
-        "metro-transform-worker"
-      ],
-      "groupName": "metro",
-      "reviewers": ["team:@ledgerhq/live-eng-core", "team:@ledgerhq/live-hub"]
-    },
-    {
-      "extends": "monorepo:expo",
-      "groupName": null
+      "reviewers": ["team:live-hub"]
     }
   ],
-  "prConcurrentLimit": 5,
+  "prConcurrentLimit": 8,
   "separateMinorPatch": true,
   "timezone": "Europe/Paris",
   "enabledManagers": ["npm"]
